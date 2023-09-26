@@ -9,8 +9,8 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
-@WebServlet("/user")
-public class UserServlet extends HttpServlet {
+@WebServlet("/AllUsers")
+public class AllUsersServlet extends HttpServlet {
 
     private final UserService userService = new UserService();
 
@@ -21,14 +21,17 @@ public class UserServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        var user = userService.getUser(1);
+        var users = userService.getUsers().get();
 
         resp.setContentType("text/html");
         var writer = resp.getWriter();
         writer.println("<html><body>");
 
-        writer.println("<h1> Пользователь: </h1>");
-        writer.println("<p style='color:Tomato'> " + user.get().getName() +"</p>");
+        for (var user : users) {
+            writer.println("<h3> Пользователь id" + user.getId() + ": </h3>");
+            writer.println("<p style='color:Tomato'> " + user.getName() + "</p>");
+        }
+
 
         writer.println("</body></html>");
         writer.close();
