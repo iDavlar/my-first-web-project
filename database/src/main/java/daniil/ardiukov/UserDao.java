@@ -105,4 +105,15 @@ public class UserDao {
     public Optional<List<User>> getAllUsers() {
         return Optional.of(this.users);
     }
+
+    public boolean updateUserName(int id, String name) {
+        try {
+            User user = findbyId(id).get();
+            user.setName(name);
+            saveData(users);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
 }

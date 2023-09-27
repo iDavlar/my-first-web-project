@@ -15,4 +15,5 @@ public class UserDto {
         this.id = user.getId();
         this.name = user.getName();
     }
+
 }

@@ -13,4 +13,8 @@ public class UserService {
     public Optional<List<UserDto>> getUsers() {
         return userDao.getAllUsers().map(list -> list.stream().map(UserDto::new).toList());
     }
+
+    public boolean updateUser(int id, String name) {
+        return userDao.updateUserName(id, name);
+    }
 }

@@ -9,8 +9,8 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
-@WebServlet("/user")
-public class UserServlet extends HttpServlet {
+@WebServlet("/ChangeUser")
+public class ChangeUserServlet extends HttpServlet {
 
     private final UserService userService = new UserService();
 
@@ -22,14 +22,19 @@ public class UserServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         var userId = req.getParameter("id");
-        var user = userService.getUser(Integer.valueOf(userId));
+        var newUserName = req.getParameter("name");
 
         resp.setContentType("text/html");
         var writer = resp.getWriter();
         writer.println("<html><body>");
 
-        writer.println("<h1> Пользователь: </h1>");
-        writer.println("<p style='color:Tomato'> " + user.get().getName() + "</p>");
+        if (userService.updateUser(Integer.parseInt(userId), newUserName)) {
+            writer.println("<h1> Имя пользователя изменено: </h1>");
+            writer.println("<p style='color:Tomato'> " + newUserName + "</p>");
+        } else {
+            writer.println("<h1> Ошибка изменения имени: </h1>");
+        }
+
 
         writer.println("</body></html>");
         writer.close();
