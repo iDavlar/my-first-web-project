@@ -9,8 +9,8 @@
 
     <modules>
         <module>database</module>
-        <module>server</module>
-        <module>webclient</module>
+        <module>service</module>
+        <module>web</module>
     </modules>
 
     <properties>

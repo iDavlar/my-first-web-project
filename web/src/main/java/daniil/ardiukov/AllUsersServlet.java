@@ -9,7 +9,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
-@WebServlet("/AllUsers")
+@WebServlet("/all-users")
 public class AllUsersServlet extends HttpServlet {
 
     private final UserService userService = new UserService();

@@ -8,8 +8,8 @@
     </parent>
     <packaging>war</packaging>
     <groupId>daniil.ardiukov</groupId>
-    <artifactId>webclient</artifactId>
-    <name>webclient</name>
+    <artifactId>web</artifactId>
+    <name>web</name>
 
     <dependencies>
 
@@ -24,7 +24,7 @@
         </dependency>
         <dependency>
             <groupId>daniil.ardiukov</groupId>
-            <artifactId>server</artifactId>
+            <artifactId>service</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
     </dependencies>

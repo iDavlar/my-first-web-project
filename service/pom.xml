@@ -7,8 +7,8 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
     <groupId>daniil.ardiukov</groupId>
-    <artifactId>server</artifactId>
-    <name>server</name>
+    <artifactId>service</artifactId>
+    <name>service</name>
 
     <dependencies>
         <dependency>

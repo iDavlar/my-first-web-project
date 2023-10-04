@@ -15,11 +15,6 @@ public class UserServlet extends HttpServlet {
     private final UserService userService = new UserService();
 
     @Override
-    public void init(ServletConfig config) throws ServletException {
-        super.init(config);
-    }
-
-    @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         var userId = req.getParameter("id");
         var user = userService.getUser(Integer.valueOf(userId));

@@ -70,11 +70,7 @@ public class UserDao {
 
     private List<User> getInitialUserData() {
         List<User> result = new ArrayList<>();
-        result.add(new User(1, "Даниил"));
-        result.add(new User(2, "Кирилл"));
-        result.add(new User(3, "Владимир"));
-        result.add(new User(4, "Ольга"));
-        result.add(new User(5, "Ксения"));
+        result.add(new User(1, "Даниил", 25, "mail@mail.ru", "Davlar", "123456"));
 
         return result;
     }
