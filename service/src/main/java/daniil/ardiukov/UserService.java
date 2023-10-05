@@ -1,5 +1,8 @@
 package daniil.ardiukov;
 
+import daniil.ardiukov.validators.AuthUserValidator;
+import daniil.ardiukov.validators.Validator;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -16,5 +19,18 @@ public class UserService {
 
     public boolean updateUser(int id, String name) {
         return userDao.updateUserName(id, name);
+    }
+
+    public boolean checkAuthentication(UserDto usedData) {
+        Validator<UserDto> validator = new AuthUserValidator();
+        if (!validator.validate(usedData)) {
+            return false;
+        }
+
+        if (userDao.auth(usedData.getLogin(), usedData.getPassword())) {
+            return true;
+        }
+        usedData.getErrors().put("Auth", "Неверный логин или пароль");
+        return false;
     }
 }

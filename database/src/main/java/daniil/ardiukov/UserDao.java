@@ -112,4 +112,10 @@ public class UserDao {
             return false;
         }
     }
+
+    public boolean auth(String login, String password) {
+        return users.stream()
+                .filter(user -> user.getName().equals(login))
+                .anyMatch(user -> user.getPassword().equals(password));
+    }
 }

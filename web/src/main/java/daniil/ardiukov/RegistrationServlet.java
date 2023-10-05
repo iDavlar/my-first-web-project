@@ -8,7 +8,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
-@WebServlet("registration")
+@WebServlet("/registration")
 public class RegistrationServlet extends HttpServlet {
 
     private final UserService userService = new UserService();
