@@ -2,10 +2,13 @@ package daniil.ardiukov.validators;
 
 import java.util.List;
 
-public class AuthUserValidator extends UserValidator {
+public class RegUserValidator extends UserValidator {
     @Override
     protected List<String> getValidatorMethodNames() {
         return List.of(
+                "validateName",
+                "validateAge",
+                "validateEmail",
                 "validateLogin",
                 "validatePassword"
         );

@@ -1,6 +1,7 @@
 package daniil.ardiukov;
 
 import daniil.ardiukov.validators.AuthUserValidator;
+import daniil.ardiukov.validators.RegUserValidator;
 import daniil.ardiukov.validators.Validator;
 
 import java.util.List;
@@ -28,6 +29,13 @@ public class UserService {
         }
 
         usedData.getErrors().put("Auth", "Неверный логин или пароль");
+        return false;
+    }
+
+    public boolean registerNew(UserDto usedData) {
+        if (new RegUserValidator().validate(usedData)) {
+            return true;
+        }
         return false;
     }
 }
