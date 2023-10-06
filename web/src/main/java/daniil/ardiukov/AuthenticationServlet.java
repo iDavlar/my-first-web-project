@@ -7,6 +7,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.HashMap;
 import java.util.Map;
 
 @WebServlet("/auth")
@@ -16,19 +18,23 @@ public class AuthenticationServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        //super.doGet(req, resp);
+//        super.doGet(req, resp);
+        PrintWriter writer = resp.getWriter();
+        writer.println("z nen");
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
         UserDto usedData = UserDto.builder()
-                .name(req.getParameter("login"))
+                .login(req.getParameter("login"))
                 .password(req.getParameter("pwd"))
                 .build();
 
         if (userService.checkAuthentication(usedData)) {
-
+            resp.sendRedirect("menu.jsp");
         } else {
+            req.setAttribute("after", AfterDataMap.of(usedData));
             req.setAttribute("errors", usedData.getErrors());
             req.getRequestDispatcher("index.jsp").forward(req, resp);
         }

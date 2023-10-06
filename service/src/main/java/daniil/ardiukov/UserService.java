@@ -22,14 +22,11 @@ public class UserService {
     }
 
     public boolean checkAuthentication(UserDto usedData) {
-        Validator<UserDto> validator = new AuthUserValidator();
-        if (!validator.validate(usedData)) {
-            return false;
-        }
-
-        if (userDao.auth(usedData.getLogin(), usedData.getPassword())) {
+        if (new AuthUserValidator().validate(usedData)
+                && userDao.auth(usedData.getLogin(), usedData.getPassword())) {
             return true;
         }
+
         usedData.getErrors().put("Auth", "Неверный логин или пароль");
         return false;
     }

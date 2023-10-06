@@ -7,29 +7,29 @@
 </head>
 <body>
 <h2>Регистрация</h2>
-<form action="registration">
+<form name="registration-form" method="post" action="registration">
   <label for="name">Имя:</label><br>
-  <input type="text" id="name" name="name" placeholder="Введите имя">
+  <input type="text" id="name" name="name" placeholder="Введите имя" value="${after.Name}">
   <span name="errorName">${errors.Name}</span>
   <br>
 
   <label for="age">Возраст:</label><br>
-  <input type="number" id="age" name="age" min="12" max="100" title="От 12 до 100">
+  <input type="number" id="age" name="age" min="12" max="100" title="От 12 до 100" value=${after.Age}>
   <span name="errorAge">${errors.Age}</span>
   <br>
 
   <label for="email">e-mail:</label><br>
-  <input type="text" id="email" name="email" placeholder="e-mail@mail.com">
+  <input type="text" id="email" name="email" placeholder="e-mail@mail.com" value="${after.Email}">
   <span name="errorEmail">${errors.Email}</span>
   <br>
 
   <label for="login">Логин:</label><br>
-  <input type="text" id="login" name="login" placeholder="Придумайте логин">
+  <input type="text" id="login" name="login" placeholder="Придумайте логин" value="${after.Login}">
   <span name="errorLogin">${errors.Login}</span>
   <br>
 
   <label for="pwd">Пароль:</label><br>
-  <input type="password" id="pwd" name="pwd" placeholder="Придумайте пароль">
+  <input type="password" id="pwd" name="pwd" placeholder="Придумайте пароль" value="${after.Password}">
   <span name="errorPassword">${errors.Password}</span>
   <br><br>
 

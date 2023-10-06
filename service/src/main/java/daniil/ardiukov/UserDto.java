@@ -16,7 +16,7 @@ public class UserDto {
     private String email;
     private String login;
     private String password;
-    private Map<String, String> errors = new HashMap<>();
+    private volatile Map<String, String> errors = new HashMap<>();
 
     public UserDto(User user) {
         this.id = user.getId();
@@ -27,4 +27,14 @@ public class UserDto {
         this.password = user.getPassword();
     }
 
+    public Map<String, String> getErrors() {
+        if (errors == null) {
+            synchronized (this) {
+                if (errors == null) {
+                    errors = new HashMap<>();
+                }
+            }
+        }
+        return errors;
+    }
 }

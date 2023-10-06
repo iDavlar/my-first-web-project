@@ -7,7 +7,7 @@
 </head>
 <body>
 <h2>Личный кабинет</h2>
-<form action="auth">
+<form name="user-data-form" method="post" action="auth">
   <label for="name">Имя:</label><br>
   <input type="text" id="name" name="name" value=${user.Name}>
   <span name="errorName">${errors.Name}</span>

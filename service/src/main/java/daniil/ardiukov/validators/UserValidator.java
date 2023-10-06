@@ -47,8 +47,10 @@ public abstract class UserValidator implements Validator<UserDto> {
         if (value == null
                 || value.isEmpty()) {
             error = "Имя не должно быть пустым";
+            result = false;
         } else if (!value.matches(NAME_MASK)) {
             error = "Имя должно состоять только из букв";
+            result = false;
         }
 
         if (!result) {
@@ -66,8 +68,10 @@ public abstract class UserValidator implements Validator<UserDto> {
         if (value == null
                 || value.isEmpty()) {
             error = "Укажите возраст";
+            result = false;
         } else if (!value.matches(AGE_MASK)) {
             error = "Возраст должен быть в диапазоне от 16 до 100";
+            result = false;
         }
 
         if (!result) {
@@ -85,8 +89,10 @@ public abstract class UserValidator implements Validator<UserDto> {
         if (value == null
                 || value.isEmpty()) {
             error = "Укажите e-mail";
+            result = false;
         } else if (!value.matches(EMAIL_MASK)) {
             error = "Указан не действительный e-mail";
+            result = false;
         }
 
         if (!result) {
@@ -104,10 +110,13 @@ public abstract class UserValidator implements Validator<UserDto> {
         if (value == null
                 || value.isEmpty()) {
             error = "Укажите логин";
+            result = false;
         } else if (!value.matches(LOGIN_MASK_1)) {
             error = "Логин должен состоять из 5 - 12 латинских букв, цифр и знака '_'";
+            result = false;
         } else if (!value.matches(LOGIN_MASK_2)) {
             error = "Логин должен начинаться с буквы";
+            result = false;
         }
 
         if (!result) {
@@ -125,8 +134,10 @@ public abstract class UserValidator implements Validator<UserDto> {
         if (value == null
                 || value.isEmpty()) {
             error = "Укажите пароль";
+            result = false;
         } else if (!value.matches(PASSWORD_MASK)) {
             error = "Пароль должен состоять из 6 - 12 латинских букв, цифр и символов '_!?'";
+            result = false;
         }
 
         if (!result) {

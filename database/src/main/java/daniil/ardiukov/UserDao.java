@@ -10,7 +10,7 @@ public class UserDao {
 
     public static final String CONF_FILE_NAME = "database.properties";
 
-    public static final String PROFILES_FILE_PROP_NAME = "users.json";
+    public static final String PROFILES_FILE_PROP_NAME = "usersJson";
 
     public static final File USERS_DATA = getUsersFile();
 
@@ -115,7 +115,7 @@ public class UserDao {
 
     public boolean auth(String login, String password) {
         return users.stream()
-                .filter(user -> user.getName().equals(login))
+                .filter(user -> user.getLogin().equals(login))
                 .anyMatch(user -> user.getPassword().equals(password));
     }
 }
