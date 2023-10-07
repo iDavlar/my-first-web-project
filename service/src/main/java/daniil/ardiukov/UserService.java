@@ -33,9 +33,14 @@ public class UserService {
     }
 
     public boolean registerNew(UserDto usedData) {
-        if (new RegUserValidator().validate(usedData)) {
+        if (new RegUserValidator().validate(usedData)
+                && createUser(usedData)) {
             return true;
         }
+        return false;
+    }
+
+    private boolean createUser(UserDto usedData) {
         return false;
     }
 }

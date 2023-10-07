@@ -7,9 +7,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.HashMap;
-import java.util.Map;
 
 @WebServlet("/auth")
 public class AuthenticationServlet extends HttpServlet {
@@ -36,5 +33,6 @@ public class AuthenticationServlet extends HttpServlet {
             req.setAttribute("errors", usedData.getErrors());
             req.getRequestDispatcher("index.jsp").forward(req, resp);
         }
+
     }
 }
