@@ -8,26 +8,57 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+import java.util.GregorianCalendar;
 
-@WebServlet("/user")
+@WebServlet("/account")
 public class UserServlet extends HttpServlet {
 
     private final UserService userService = new UserService();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        var userId = req.getParameter("id");
-        var user = userService.getUser(Integer.valueOf(userId));
+        Integer userId = (Integer) req.getSession().getAttribute("UserId");
+        if (userId == null) {
+//            resp.sendRedirect("index.jsp");
+            req.getRequestDispatcher("index.jsp").include(req, resp);
+            return;
+        }
+        var usedData = userService.getUser(userId).get();
 
-        resp.setContentType("text/html");
-        var writer = resp.getWriter();
-        writer.println("<html><body>");
+        req.setAttribute("after", AfterDataMap.of(usedData));
+        req.setAttribute("errors", usedData.getErrors());
+        req.getRequestDispatcher("account_form.jsp").include(req, resp);
 
-        writer.println("<h1> Пользователь: </h1>");
-        writer.println("<p style='color:Tomato'> " + user.get().getName() + "</p>");
+    }
 
-        writer.println("</body></html>");
-        writer.close();
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+        Integer userId = (Integer) req.getSession().getAttribute("UserId");
+        if (userId == null) {
+            resp.sendRedirect("index.jsp");
+            return;
+        }
+
+        UserDto userData = UserDto.builder()
+                .id(userId)
+                .name(req.getParameter("name"))
+                .age(req.getParameter("age"))
+                .email(req.getParameter("email"))
+                .login(req.getParameter("login"))
+                .password(req.getParameter("pwd"))
+                .build();
+
+        String msg = "";
+        if (userService.changeUser(userData)) {
+            msg ="Успешно!";
+        } else {
+            msg ="Ошибка!!";
+        }
+        userData.getErrors().put("Status", msg);
+
+        req.setAttribute("after", AfterDataMap.of(userData));
+        req.setAttribute("errors", userData.getErrors());
+        req.getRequestDispatcher("account_form.jsp").forward(req, resp);
     }
 }

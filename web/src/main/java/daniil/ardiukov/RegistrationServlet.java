@@ -20,7 +20,7 @@ public class RegistrationServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        UserDto usedData = UserDto.builder()
+        UserDto userData = UserDto.builder()
                 .name(req.getParameter("name"))
                 .age(req.getParameter("age"))
                 .email(req.getParameter("email"))
@@ -28,11 +28,11 @@ public class RegistrationServlet extends HttpServlet {
                 .password(req.getParameter("pwd"))
                 .build();
 
-        if (userService.registerNew(usedData)) {
-            resp.sendRedirect("menu.jsp");
+        if (userService.registerNew(userData)) {
+            resp.sendRedirect("/auth");
         } else {
-            req.setAttribute("after", AfterDataMap.of(usedData));
-            req.setAttribute("errors", usedData.getErrors());
+            req.setAttribute("after", AfterDataMap.of(userData));
+            req.setAttribute("errors", userData.getErrors());
             req.getRequestDispatcher("registration.jsp").forward(req, resp);
         }
     }

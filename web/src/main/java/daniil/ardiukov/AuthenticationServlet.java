@@ -21,16 +21,17 @@ public class AuthenticationServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        UserDto usedData = UserDto.builder()
+        UserDto userData = UserDto.builder()
                 .login(req.getParameter("login"))
                 .password(req.getParameter("pwd"))
                 .build();
 
-        if (userService.checkAuthentication(usedData)) {
+        if (userService.checkAuthentication(userData)) {
+            req.getSession().setAttribute("UserId", userData.getId());
             resp.sendRedirect("menu.jsp");
         } else {
-            req.setAttribute("after", AfterDataMap.of(usedData));
-            req.setAttribute("errors", usedData.getErrors());
+            req.setAttribute("after", AfterDataMap.of(userData));
+            req.setAttribute("errors", userData.getErrors());
             req.getRequestDispatcher("index.jsp").forward(req, resp);
         }
 

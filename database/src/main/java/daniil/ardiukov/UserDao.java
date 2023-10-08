@@ -2,6 +2,8 @@ package daniil.ardiukov;
 
 import java.io.*;
 import java.util.*;
+import java.util.function.Consumer;
+import java.util.function.Predicate;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -70,7 +72,14 @@ public class UserDao {
 
     private List<User> getInitialUserData() {
         List<User> result = new ArrayList<>();
-        result.add(new User(1, "Даниил", 25, "mail@mail.ru", "Davlar", "123456"));
+        result.add(new User(
+                1,
+                "Даниил",
+                25,
+                "mail@mail.com",
+                "Davlar",
+                "123456"
+        ));
 
         return result;
     }
@@ -113,9 +122,43 @@ public class UserDao {
         }
     }
 
-    public boolean auth(String login, String password) {
+    public Optional<User> findByLogPass(String login, String password) {
         return users.stream()
                 .filter(user -> user.getLogin().equals(login))
-                .anyMatch(user -> user.getPassword().equals(password));
+                .filter(user -> user.getPassword().equals(password))
+                .findFirst();
+    }
+
+    public Optional<User> find(Predicate<User> filter) {
+        return users.stream()
+                .filter(filter)
+                .findFirst();
+    }
+
+    public int getNextId() {
+        return users.stream().mapToInt(User::getId).max().orElse(-1) + 1;
+    }
+
+    public Optional<User> createNewUser(String name, int age, String email, String login, String password) {
+        User user = new User(
+                getNextId(),
+                name,
+                age,
+                email,
+                login,
+                password
+        );
+        users.add(user);
+        saveData(users);
+        return Optional.of(user);
+    }
+
+    public Optional<User> update(int id, Consumer<User> consumer) {
+        Optional<User> optionalUser = users.stream()
+                .filter(user -> user.getId() == id)
+                .peek(consumer)
+                .findFirst();
+        saveData(users);
+        return optionalUser;
     }
 }

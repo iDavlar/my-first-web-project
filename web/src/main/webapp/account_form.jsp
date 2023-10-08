@@ -3,13 +3,13 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"\>
-<title>Регистрация</title>
+<title>Личный кабинет</title>
 </head>
 <body>
-<h2>Регистрация</h2>
-<form name="registration-form" method="post" action="registration">
+<h2>Личный кабинет</h2>
+<form name="user-data-form" method="post" action="account">
   <label for="name">Имя:</label><br>
-  <input type="text" id="name" name="name" placeholder="Введите имя" value="${after.Name}">
+  <input type="text" id="name" name="name" value=${after.Name}>
   <span name="errorName">${errors.Name}</span>
   <br>
 
@@ -19,24 +19,25 @@
   <br>
 
   <label for="email">e-mail:</label><br>
-  <input type="text" id="email" name="email" placeholder="e-mail@mail.com" value="${after.Email}">
+  <input type="text" id="email" name="email" value=${after.Email}>
   <span name="errorEmail">${errors.Email}</span>
   <br>
 
   <label for="login">Логин:</label><br>
-  <input type="text" id="login" name="login" placeholder="Придумайте логин" value="${after.Login}">
+  <input type="text" id="login" name="login" value=${after.Login}>
   <span name="errorLogin">${errors.Login}</span>
   <br>
 
   <label for="pwd">Пароль:</label><br>
-  <input type="password" id="pwd" name="pwd" placeholder="Придумайте пароль" value="${after.Password}">
+  <input type="password" id="pwd" name="pwd" value=${after.Password}>
   <span name="errorPassword">${errors.Password}</span>
   <br><br>
 
-  <input type="submit" value="Завершить">
+  <input type="submit" value="Изменить">
+  <span name="errorPassword">${errors.Status}</span>
 </form>
+<p><a href="menu.jsp">Меню</a></p>
 
-<p><a href="index.jsp">Войти</a></p>
 </body>
 </html>
 

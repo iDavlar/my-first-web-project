@@ -19,6 +19,10 @@ public class UserDto {
     private volatile Map<String, String> errors = new HashMap<>();
 
     public UserDto(User user) {
+        this.fillFromUser(user);
+    }
+
+    public void fillFromUser(User user) {
         this.id = user.getId();
         this.name = user.getName();
         this.age = String.valueOf(user.getAge());

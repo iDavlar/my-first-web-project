@@ -1,6 +1,5 @@
 package daniil.ardiukov;
 
-import com.sun.source.tree.AssertTree;
 import org.junit.Test;
 
 import java.util.Arrays;
@@ -14,7 +13,7 @@ public class UsedDaoTest {
     public void authenticationTest() {
         try {
             assertTrue(
-                    UserDao.getInstance().auth("Davlar", "123456")
+                    UserDao.getInstance().findByLogPass("Davlar", "123456").isPresent()
             );
 
         } catch (Exception e) {
